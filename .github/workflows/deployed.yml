@@ -20,5 +20,12 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       - name: NPM install
         run: npm install
-      - name: Trivy fs
-        run: trivy fs .      
+      
+      - name: Docker build and push
+        run: |
+          docker build -t tic-tac-toe .
+          docker tag tic-tac-toe swamy1047/tic-tac-toe:latest
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOCKEN }}
+          docker push swamy1047/tic-tac-toe:latest
+        env: 
+          DOCKER_CLI_ACI: 1

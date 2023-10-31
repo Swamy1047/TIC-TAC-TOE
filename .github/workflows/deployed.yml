@@ -9,7 +9,7 @@ on:
 jobs:
   build:
      name: Build
-     runs-on: [self-hsted]
+     runs-on: [self-hosted]
      steps:
       - uses: actions/checkout@v2
         with:
@@ -31,7 +31,7 @@ jobs:
           DOCKER_CLI_ACI: 1
   deploy:
     needs: build analyze scan
-    runs on: [self-hsted]
+    runs on: [self-hosted]
     steps:
       - name: docker pull image
         run: docker pull swamy1047/tic-tac-toe:latest
